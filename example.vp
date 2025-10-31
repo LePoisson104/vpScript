@@ -1,0 +1,29 @@
+let string = "hello world"
+let a = 2
+let b = 3
+let sum = a + b
+
+print(string, a, b, sum)
+print("sum: ", a + b)
+
+func sum (a, b){
+    return a + b
+}
+
+let twoSum = sum(2, 3)
+print(twoSum)
+print(sum(2, 3))
+
+let a = 3
+while a > 0 {
+    print(a)
+    a--
+}
+
+if 2 < 3 {
+    print("less than")
+}
+
+for i = 0; i < 4; i++ {
+    print(i)
+}
