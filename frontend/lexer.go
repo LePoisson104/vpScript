@@ -5,49 +5,51 @@ import (
 	"unicode"
 )
 
+type TokenType string
+
 const (
 	// Literal Types
-	Number = "NUMBER"
-	String = "STRING"
-	Identifier = "IDENTIFIER"
+	Number TokenType = "Number"
+	String TokenType = "String"
+	Identifier TokenType = "Identifier"
 
 	// keywords
-	Let = "LET"
-	Const = "CONST"
+	Let TokenType = "Let"
+	Const TokenType = "Const"
 
 	// Grouping * Opearators
-	BinaryOperator = "BINARY_OPERATOR"
-	DoubleQuote = "DoubleQuote"
-	Equals = "EQUALS"
-	NotEqual = "NOT_EQUAL"
-	OpenParen = "OPEN_PAREN"
-	CloseParen = "CLOSE_PAREN"
-	OpenBracket = "OPEN_BRACKET"
-	CloseBracket = "CLOSE_BRACKET"
-	Comma = "COMMA"
-	GreaterThan = "GREATER_THAN"
-	LessThan = "LESS_THAN"
-	GreaterThanOREqualTo = "GREATER_THAN_OR_EQUAL_TO"
-	LessThanOrEqualTO = "LESS_THAN_OR_EQUAL_TO"
-	EOF = "END_OF_FILE"
+	BinaryOperator TokenType = "BinaryOperator"
+	DoubleQuote TokenType = "DoubleQuote"
+	Equals TokenType = "Equals"
+	NotEqual TokenType = "NotEqual"
+	OpenParen TokenType = "OpenParen"
+	CloseParen TokenType = "CloseParen"
+	OpenBracket TokenType = "OpenBracket"
+	CloseBracket TokenType = "CloseBracket"
+	Comma TokenType = "Comma"
+	GreaterThan TokenType = "GreaterThan"
+	LessThan TokenType = "LessThan"
+	GreaterThanOREqualTo TokenType = "GreaterThanOREqualTo"
+	LessThanOrEqualTO TokenType = "LessThanOrEqualTO"
+	EOF TokenType = "EOF"
 
 	// Reserved keywords
-	Print = "PRINT"
-	Func = "FUNC"
-	For = "FOR"
-	While = "WHILE"
-	If = "IF"
-	Elif = "ELIF"
-	Else = "ELSE"
-	Return = "RETURN"
+	Print TokenType = "Print"
+	Func TokenType = "Func"
+	For TokenType = "For"
+	While TokenType = "While"
+	If TokenType = "If"
+	Elif TokenType = "Elif"
+	Else TokenType = "Else"
+	Return TokenType = "Return"
 )
 
 type Token struct {
-	Type string;
+	Type TokenType;
 	Value string
 }
 
-func newToken(tokenType string, value string) Token {
+func newToken(tokenType TokenType, value string) Token {
 	return Token{
 		Type: tokenType,
 		Value: value,
@@ -73,9 +75,7 @@ func Tokenize(sourceCode string) []Token {
 	for position <= len(sourceCode) - 1 {
 		char := rune(sourceCode[position])
 		
-		if position == len(sourceCode) - 1 {
-			tokens = append(tokens, newToken(EOF, "EOF"))
-		} else if isSkippable(char) {
+		if isSkippable(char) {
 			position++
 			continue
 		} else if char == '(' {
@@ -187,6 +187,8 @@ func Tokenize(sourceCode string) []Token {
 		}
 		position++
 	}
+	tokens = append(tokens, newToken(EOF, "EOF"))
+
 	return tokens
 }
 
