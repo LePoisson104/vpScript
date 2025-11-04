@@ -1,0 +1,7 @@
+if 2 <= 3 {
+    print("less than")
+} elif 2 >= 1 {
+    print("greater than")
+} else {
+    print("equal")
+}
